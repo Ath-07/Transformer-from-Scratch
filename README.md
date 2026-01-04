@@ -3,7 +3,7 @@
 ## Overview
 
 This project implements a **Transformer-based encoder–decoder model from scratch using TensorFlow/Keras** for **English-to-French machine translation**.  
-All core components—attention, masking, encoder–decoder interaction, and inference—are explicitly defined without using high-level Transformer APIs.
+All core components: attention, masking, encoder–decoder interaction, and inference are explicitly defined without using high-level Transformer APIs.
 
 ---
 
