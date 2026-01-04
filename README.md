@@ -1,72 +1,66 @@
-# 🧠 Transformer From Scratch: English → French
+# Transformer From Scratch (English → French)
 
-A clean, from-scratch implementation of the **Transformer architecture** for **English-to-French machine translation**, built using **PyTorch**.  
-The focus of this project is to **expose the inner workings of attention-based sequence models** by implementing every core component manually.
+## Overview
 
----
-
-## ✨ Highlights
-
-- End-to-end **Encoder–Decoder Transformer**
-- Manual implementation of all architectural blocks
-- Trained on a real **English–French parallel dataset**
-- Covers preprocessing, training, and inference
-- Optimized for **learning and interpretability**
+This project implements a **Transformer-based encoder–decoder model from scratch using TensorFlow/Keras** for **English-to-French machine translation**.  
+All core components—attention, masking, encoder–decoder interaction, and inference—are explicitly defined without using high-level Transformer APIs.
 
 ---
 
-## 📘 Dataset
+## Dataset
 
-- Parallel English–French sentence pairs  
-- Automatically downloaded and extracted  
-- Vocabulary created directly from the corpus  
-- Special tokens for padding, start, and end of sequence are handled explicitly  
+- **English–French parallel corpus (`fra-eng`)**
+- Loaded using TensorFlow utilities
+- Preprocessing includes:
+  - Tokenization and text vectorization
+  - Fixed-length padding
+  - `[start]` and `[end]` tokens for decoder sequences
 
 ---
 
-## 🏗 Architecture Overview
+## Model Architecture
 
-The model is composed of the following building blocks:
-
-- Token embeddings for source and target languages  
-- Sinusoidal positional encoding  
+- Token embeddings with positional encoding  
 - Multi-head self-attention  
-- Decoder-side masked self-attention  
 - Encoder–decoder attention  
-- Position-wise feed-forward layers  
-- Residual connections with layer normalization  
-- Final linear projection to vocabulary space  
+- Feed-forward networks  
+- Residual connections and normalization  
+- Vocabulary projection layer  
 
 ---
 
-## 🔄 Data Flow
+## Training
 
-Input Sentence  
-→ Embedding + Positional Encoding  
-→ Encoder Layers  
-→ Decoder Layers (with causal masking)  
-→ Token-wise Vocabulary Scores
-
----
-
-## 🎭 Masking Logic
-
-- Padding tokens are excluded from attention and training  
-- Look-ahead masking enforces autoregressive decoding  
-- Metrics are computed only on valid (non-padding) tokens  
+- Trained for **20 epochs**
+- **1828 steps per epoch**
+- Masked loss used for optimization
+- Masked accuracy tracked during training
 
 ---
 
-## 🚀 Training Setup
+## Results
 
-- Teacher forcing during training  
-- Padding-aware loss and accuracy computation of about 71%
-- Explicit training and validation loops  
+- Training converges steadily across epochs
+- Validation metrics remain stable after early training
+- Final masked accuracy:
+  - **Training:** ~74%
+  - **Validation:** ~64%
+- Model generates coherent French translations using greedy decoding
 
 ---
 
-## 🧰 Tech Stack
+## Inference
 
-- **Python 3**
-- **PyTorch**
-- **TensorFlow** (dataset handling only)
+- Custom autoregressive decoding function
+- Decoding starts with `[start]` token
+- Tokens generated step-by-step
+- Decoding stops when `[end]` token is produced or sequence limit is reached
+
+---
+
+## Usage
+
+Run the notebook end-to-end:
+
+```bash
+jupyter notebook transformer_from_scratch.ipynb
